@@ -9,8 +9,9 @@ permalink: /spline-fitting/
 
 # Introduction
 
-In this article, I'll show you how I implemented spline fitting in Scan Tailor, which is a
-tool for post-processing scanned or photographed pages. Spline fitting is used there in the dewarping workflow, where a curved page is flattened. The picture below should give you the idea:
+In this article, I'll show you how I implemented spline fitting in Scan Tailor, which is a tool for post-processing scanned or photographed pages. I am the original author of that project and I was involved with it between 2007 and 2016.
+
+Spline fitting is used there in the dewarping workflow (introduced around 2011), where a curved page is flattened. The picture below should give you the idea:
 
 <div style="text-align:center"><img alt="Dewarping grid" src="/assets/posts/spline-fitting/dewarping-grid.jpg" /></div>
 
@@ -21,8 +22,6 @@ You can let Scan Tailor build the grid by itself or you can define it manually. 
 <div style="text-align:center"><img alt="Polylines" src="/assets/posts/spline-fitting/polylines.jpg" /></div>
 
 That screenshot above was taken from Scan Tailor's debugging output (Menu -> Tools -> Debug Mode).
-
-BTW, I am using the [experimental branch](https://github.com/Tulon/scantailor/tree/experimental) of Scan Tailor, which is the branch I last worked on, before I abandoned the project back in 2016.
 
 Now suppose the dewarping grid built for you by Scan Tailor is imperfect and you want to adjust it manually. How are you going to adjust the polylines? Certainly not point-by-point!
 
@@ -321,7 +320,7 @@ Each ellipse represents a constant level of penalty. So, on the same penalty
 budget we can now afford a larger displacement along the polyline than in
 the orthogonal direction.
 
-How much do we stretch those isocontours? We stretch them more in low curvature areas and less in high curvature ones. This article is getting longer than I would like it to be, so I am not giving the full details here, but you can find them in these two papers ([1](http://scholar.google.com/scholar?q=A+concept+for+parametric+surface+fitting+which+avoids+the+parametrization+problem), [2](http://scholar.google.com/scholar?q=Fitting+b-spline+curves+to+point+clouds+by+squared+distance+minimization)). Also take a look at the [relevant code](https://github.com/Tulon/scantailor/blob/experimental/math/spfit/SqDistApproximant.h) in Scan Tailor. What's important is that the modified objective function is still quadratic, so we optimize it exactly the same way.
+How much do we stretch those isocontours? We stretch them more in low curvature areas and less in high curvature ones. This article is getting longer than I would like it to be, so I am not giving the full details here, but you can find them in these two papers ([1](http://scholar.google.com/scholar?q=A+concept+for+parametric+surface+fitting+which+avoids+the+parametrization+problem), [2](http://scholar.google.com/scholar?q=Fitting+b-spline+curves+to+point+clouds+by+squared+distance+minimization)). Also take a look at the [relevant code](https://github.com/scantailor/scantailor/blob/master/math/spfit/SqDistApproximant.h) in Scan Tailor. What's important is that the modified objective function is still quadratic, so we optimize it exactly the same way.
 
 Does the above help? It does, but it solves one problem and creates two more:
 
@@ -377,6 +376,6 @@ that the gradient of the objective function is a linear combination of gradients
 
 # Closing Words
 
-That's it more or less. I had to skip some details in order to keep the article's length reasonable, but if you still remember some Linear Algebra and some Calculus, it should be quite possible for you to fill those gaps and implement spline fitting for your project. For reference, check out Scan Tailor's [implementation](https://github.com/Tulon/scantailor/tree/experimental/math/spfit).
+That's it more or less. I had to skip some details in order to keep the article's length reasonable, but if you still remember some Linear Algebra and some Calculus, it should be quite possible for you to fill those gaps and implement spline fitting for your project. For reference, check out Scan Tailor's [implementation](https://github.com/scantailor/scantailor/blob/master/math/spfit/SqDistApproximant.h).
 
 BTW, the [author](/about/) may be available for contracting work.
