@@ -110,15 +110,23 @@ public:
 
 With (2) being a linear function of $ \mathbf{X} $ and (1) being a quadratic function of (2), (1) must be a quadratic function of $ \mathbf{X} $. To minimize (1), we just need to compute its derivatives with respect to $ \mathbf{X} $, set them to zero and solve the resulting linear system. Easy? Not exactly. How are we going to take derivatives with respect to a matrix? They don't teach you that in your undergraduate math courses!
 
-What we are going to do is to bring (1) to the canonical form of a scalar-valued, multivariable quadratic function:
+What we are going to do is to bring (1) to the canonical form of a scalar-valued, multivariable quadratic function, that has well known derivatives:
 
 $$
 \mathbf{x}^\top \mathbf{A} \mathbf{x} + \mathbf{b}^\top \mathbf{x} + c \tag{3}
 $$
 
-Where $ \mathbf{x} $ is our matrix $ \mathbf{X} $ flattened into a vector.
+Where $ \mathbf{x} $ is our matrix $ \mathbf{X} $ flattened into a vector and $ \mathbf{A} $, $ \mathbf{b} $ and $ c $ are arbitrary parameters.
 
-That form has well-known gradient (the vector of partial derivatives), which is:
+Perhaps it's worth to explain what the first term of (3) expands to:
+
+$$
+\mathbf{x}^\top \mathbf{A} \mathbf{x} = \sum_{i,j}{\mathbf{x}_i \mathbf{A}_{i,j} \mathbf{x}_j}
+$$
+
+Basically, we take every element of $ \mathbf{x} $, multiply it by every other element (and also the same element) and by a corresponding coefficient from matrix $ \mathbf{A} $. Then we sum up the resulting terms.
+
+(3) has well-known gradient (the vector of first partial derivatives), which is:
 
 $$
 (\mathbf{A}^\top + \mathbf{A}) \mathbf{x} + \mathbf{b} \tag{4}
