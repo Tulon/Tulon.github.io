@@ -35,6 +35,7 @@ github_username: Tulon
 theme: minima
 
 plugins:
+  - jekyll-sitemap
   - jekyll-remote-theme
   - jemoji
 
